@@ -92,6 +92,7 @@ class ColumnFamilyHandle {
   virtual Status GetDescriptor(ColumnFamilyDescriptor* desc) = 0;
   // Returns the comparator of the column family associated with the
   // current handle.
+  // [wai-comment] 不同 CF 可以有不同的 user_cmp
   virtual const Comparator* GetComparator() const = 0;
 };
 

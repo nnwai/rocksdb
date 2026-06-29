@@ -2609,10 +2609,13 @@ class DBImpl : public DB {
 
   WriteBufferManager* write_buffer_manager_;
 
+  // [wai-comment] DB 持有，所有 CF 共享一个 WriteThread，seq/snapshot 为 DB 级别
+  //  一个 WriteBatch 可能包括多个 CF 的写入
   WriteThread write_thread_;
   WriteBatch tmp_batch_;
   // The write thread when the writers have no memtable write. This will be used
   // in 2PC to batch the prepares separately from the serial commit.
+  // [wai-comment] 主要是事务 prepare 和 commit marker
   WriteThread nonmem_write_thread_;
 
   WriteController write_controller_;

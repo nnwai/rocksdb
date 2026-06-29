@@ -7223,6 +7223,7 @@ ColumnFamilyData* VersionSet::CreateColumnFamily(
   assert(edit->IsColumnFamilyAdd());
 
   MutableCFOptions dummy_cf_options;
+  // [wai-comment] 每个 CF 单独一条 version 链
   Version* dummy_versions =
       new Version(nullptr, this, file_options_, dummy_cf_options, io_tracer_);
   // Ref() dummy version once so that later we can call Unref() to delete it
